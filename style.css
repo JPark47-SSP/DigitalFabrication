@@ -1,8 +1,9 @@
 body {
     font: 20px "Gill Sans", Verdana, sans-serif;
     line-height: 1.8;
-    color: blue;
-    background-color: #f0f0f0;
+    color: rgb(255,99,71);
+    background-color: rgb(255,99,71,15%);
+    background-image: url("download.jpg");
     padding-top: 0px !important;
   }
 

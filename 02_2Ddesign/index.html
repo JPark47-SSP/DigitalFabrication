@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
   <title>PS70: Intro to Digital Fabrication</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../style.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .assignment {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    img {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark" style=" color: #EEE7E8;">
-    <div style="align-items: center; justify-content: center;" class="container-fluid">
-      <div class="flexrow">
-        <h2 class="nav-title">PS70 Fall 2024</h2>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark" style="color: #EEE7E8; background-color: #333;">
+    <div class="container-fluid justify-content-between">
+      <h2 class="nav-title">PS70 Fall 2024</h2>
       <div class="navbar-nav">
-        <h4><a class="nav-link" href="../index.html">Home</a></h4>
-        <h4><a class="nav-link" href="../about.html">About</a></h4>
+        <a class="nav-link" href="../index.html"><h4>Home</h4></a>
+        <a class="nav-link" href="../about.html"><h4>About</h4></a>
       </div>
     </div>
   </nav>
 
-  <div class="textcontainer">
-    <p class="margin"></p>
-
+  <!-- Page Content -->
+  <div class="textcontainer text-center mt-4">
     <h3>Week 2: 2D Design & Cutting</h3>
+    <a id="btn" class="btn btn-secondary mt-2 mb-4" href="./temp.zip" download>Test Download Button</a>
 
-    <p class="margin"></p>
-    <div class="flexrow">
-      <a id="btn" href="./temp.zip" download>Test Download Button</a>
-    </div>
-    <p class="margin"></p>
-
-    <h4>Assignment 1: Make a Box</h4>
-    <div class="center-row" style="text-align: center; margin-bottom: 40px;">
-      <img src="./Box1.jpeg" alt="Laser-cut box" width="300">
-      <p>This is the finger-jointed box I designed and cut during Week 2 using the laser cutter. I used cardboard to prototype the dimensions before cutting with wood.</p>
+    <!-- Assignment 1 -->
+    <div class="assignment">
+      <h4>Assignment 1: Make a Box</h4>
+      <img src="Box1.jpeg" alt="Finger-jointed box front view">
+      <p>This is the finger-jointed box I designed and cut during Week 2 using the laser cutter.</p>
     </div>
 
-    <h4>Assignment 2: Fusion 360 Tutorial</h4>
-    <div class="center-row" style="text-align: center; margin-bottom: 40px;">
-      <img src="./Box2.jpeg" alt="Fusion 360 tutorial" width="300">
-      <p>This image shows a screenshot from the Fusion 360 tutorial where I learned how to extrude and modify geometry.</p>
+    <!-- Assignment 2 -->
+    <div class="assignment">
+      <h4>Assignment 2: Fusion 360 Tutorial</h4>
+      <img src="Box2.jpeg" alt="Fusion 360 tutorial image">
+      <p>This screenshot shows the model I created while following the Fusion 360 tutorial.</p>
     </div>
 
-    <h4>Assignment 3: Fusion Modeling</h4>
-    <div class="center-row" style="text-align: center; margin-bottom: 40px;">
-      <img src="./Box3.jpeg" alt="Fusion model final" width="300">
-      <p>This was the final model I created in Fusion 360 for the assignment. It includes fillets, holes, and other features I learned.</p>
+    <!-- Assignment 3 -->
+    <div class="assignment">
+      <h4>Assignment 3: Fusion Modeling</h4>
+      <img src="Box3.jpeg" alt="Final Fusion model">
+      <p>This final model includes design features I explored using Fusion 360’s modeling tools.</p>
     </div>
   </div>
 
-  <script src="../strapdown.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

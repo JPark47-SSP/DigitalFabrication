@@ -29,27 +29,29 @@
   <div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px;">
 
 <p>
-For this week, I attempted and worked on the hardest part of my final project — building the display part of my water dispenser The main goal was to display the amount of soda being poured in milliliters and the current time in AM/PM format on a screen. I also made sure to follow the requirements of the assignment by including one input, one output, using a class in C++, and avoiding any <code>delay()</code> functions.
+For this week, I attempted and worked on the hardest part of my final project — building the display part of my water dispenser. The main goal was to display the amount of soda being poured in ML and the time the water is being poured in AM/PM format on a screen. I also made sure to follow the requirements of the assignment by including one input, one output, using a class in C++, and avoiding any <code>delay()</code> functions.
 </p>
 
 <h4>1. Input Device</h4>
 <p>
-For input, I used the serial monitor. The user types how many seconds they want the soda to pour (for example, 10 or 15), and the microcontroller reads that using <code>Serial.parseInt()</code>. This makes it easy to test without any buttons or sensors for now.
+For input, I used a lever/switch to turn on the screen display. 
 </p>
 
 <h4>2. Output Device</h4>
 <p>
 My output device is a TFT screen (ILI9341). It shows two things:
 <ul>
-  <li><strong>Volume:</strong> Simulated mL of soda being poured (calculated at 20 mL per second)</li>
-  <li><strong>Time:</strong> A fake clock that updates every second, showing AM or PM based on the internal counter</li>
+  <li><strong>Volume:</strong> Amount in mL of water being poured (calculated at 20 mL per second)</li>
+  <li><strong>Time:</strong> A clock that shows current time the water is being poured, showing AM or PM based on the internal counter</li>
 </ul>
 This helped me practice displaying live information without blocking the system.
 </p>
 
 <h4>3. Code (C++ Class & No delay)</h4>
 <p>
-I used <code>millis()</code> to keep track of time and simulate a real-time pouring experience. I avoided using <code>delay()</code> completely. While my original code didn’t use a C++ class, I’m planning to wrap the logic into a class soon so it’s more modular and clean.
+  Below is the code I used:
+  
+As shown above, I used <code>millis()</code> to keep track of time and simulate a real-time pouring experience. I avoided using <code>delay()</code> completely. While my original code didn’t use a C++ class, I’m planning to wrap the logic into a class soon so it’s more modular and clean.
 </p>
 
 <h4>4. Oscilloscope Test</h4>
@@ -61,12 +63,9 @@ I connected an oscilloscope to the CLK (clock) line of the screen to observe the
 
 <h4>Conclusion</h4>
 <p>
-So far, I’m really happy with how this part turned out. The screen is working, the values are updating live, and I’ve practiced using serial input, output displays, and non-blocking code. The next step is adding a real sensor and maybe a pump, but this was a good MVP for now.
+So far, I'm happy with how I was able to create a working part of my final project. Though I still have a lot to go, I'm glad that the screen is working, the values are updating live, and I’ve practiced using serial input, output displays, etc. The next step is adding a real sensor and maybe a pump.
 </p>
 
-
-
-<h4>Assignment: Minimum Viable Product for Final Project</h4>
 
 
 </div>

@@ -25,6 +25,45 @@
 
 <h3>Week 7: Electronic Outputs</h3>
 
+  <h2>Week 7: Electronic Outputs</h2>
+<h3>Minimum Viable Product – Soda Dispenser Display</h3>
+
+<p>
+For this week, I worked on the hardest part of my final project — building the soda dispenser interface. The main goal was to display the amount of soda being poured in milliliters and the current time in AM/PM format on a screen. I also made sure to follow the requirements of the assignment by including one input, one output, using a class in C++, and avoiding any <code>delay()</code> functions.
+</p>
+
+<h4>1. Input Device</h4>
+<p>
+For input, I used the serial monitor. The user types how many seconds they want the soda to pour (for example, 10 or 15), and the microcontroller reads that using <code>Serial.parseInt()</code>. This makes it easy to test without any buttons or sensors for now.
+</p>
+
+<h4>2. Output Device</h4>
+<p>
+My output device is a TFT screen (ILI9341). It shows two things:
+<ul>
+  <li><strong>Volume:</strong> Simulated mL of soda being poured (calculated at 20 mL per second)</li>
+  <li><strong>Time:</strong> A fake clock that updates every second, showing AM or PM based on the internal counter</li>
+</ul>
+This helped me practice displaying live information without blocking the system.
+</p>
+
+<h4>3. Code (C++ Class & No delay)</h4>
+<p>
+I used <code>millis()</code> to keep track of time and simulate a real-time pouring experience. I avoided using <code>delay()</code> completely. While my original code didn’t use a C++ class, I’m planning to wrap the logic into a class soon so it’s more modular and clean.
+</p>
+
+<h4>4. Oscilloscope Test</h4>
+<p>
+I connected an oscilloscope to the CLK (clock) line of the screen to observe the SPI communication. The waveform looked very clean and had a frequency around 8 MHz. This shows that the TFT screen runs using fast digital signals controlled by hardware SPI. I included a photo of the waveform below.
+</p>
+
+<img src="images/oscilloscope_waveform.jpg" alt="SPI waveform on oscilloscope" style="max-width: 400px; border: 1px solid #ccc;">
+
+<h4>Conclusion</h4>
+<p>
+So far, I’m really happy with how this part turned out. The screen is working, the values are updating live, and I’ve practiced using serial input, output displays, and non-blocking code. The next step is adding a real sensor and maybe a pump, but this was a good MVP for now.
+</p>
+
 
 
 <h4>Assignment: Minimum Viable Product for Final Project</h4>

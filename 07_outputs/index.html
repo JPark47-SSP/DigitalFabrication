@@ -53,16 +53,117 @@ When the dispenser is active, the numbers update live — you can see both the v
 <h4>3. Code (C++ Class & No delay)</h4>
 <p>
   Below is the code I used:
+
+<pre style="background:#f8f8f8; padding:15px; border-radius:10px; overflow-x:auto; font-family:monospace; font-size:13px;">
+#include &lt;Adafruit_GFX.h&gt;
+#include &lt;Adafruit_ILI9341.h&gt;
+#include &lt;SPI.h&gt;
+
+#define TFT_CS   10
+#define TFT_DC   8
+#define TFT_RST  9
+
+#define SWITCH_PIN 2
+#define FLOW_PIN   3
+#define PULSE_PER_LITER 450.0
+#define mL_per_pulse (1000.0 / PULSE_PER_LITER)
+
+Adafruit_ILI9341 tft(TFT_CS, TFT_DC, TFT_RST);
+
+volatile unsigned long pulseCount = 0;
+
+class RealDispenser {
+  private:
+    bool pouring = false;
+    unsigned long startMillis = 0;
+    unsigned long lastUpdate = 0;
+
+  public:
+    void begin() {
+      pinMode(SWITCH_PIN, INPUT_PULLUP);
+      pinMode(FLOW_PIN, INPUT_PULLUP);
+      attachInterrupt(digitalPinToInterrupt(FLOW_PIN), countPulse, RISING);
+
+      tft.begin();
+      tft.setRotation(1);
+      tft.setTextSize(2);
+      tft.setTextColor(ILI9341_BLACK, ILI9341_WHITE);
+      tft.fillScreen(ILI9341_WHITE);
+      showMessage("Ready. Flip switch.");
+    }
+
+    void update() {
+      bool switchOn = digitalRead(SWITCH_PIN) == LOW;
+
+      if (switchOn && !pouring) {
+        pouring = true;
+        pulseCount = 0;
+        startMillis = millis();
+        lastUpdate = 0;
+      }
+
+      if (pouring) {
+        unsigned long now = millis();
+        if (now - lastUpdate >= 1000) {
+          lastUpdate = now;
+          float volume = pulseCount * mL_per_pulse;
+          printInfo(now, volume);
+        }
+
+        if (!switchOn) {
+          pouring = false;
+          showMessage("Stopped.");
+        }
+      }
+    }
+
+    void printInfo(unsigned long ms, float volume) {
+      unsigned long totalSec = ms / 1000;
+      int sec = totalSec % 60;
+      int min = (totalSec / 60) % 60;
+      int hour = (totalSec / 3600) % 24;
+      int hour12 = hour % 12;
+      if (hour12 == 0) hour12 = 12;
+      String ampm = hour >= 12 ? "PM" : "AM";
+
+      char timeStr[16];
+      sprintf(timeStr, "%02d:%02d:%02d %s", hour12, min, sec, ampm.c_str());
+
+      tft.fillScreen(ILI9341_WHITE);
+      tft.setCursor(10, 40);
+      tft.print("Time: ");
+      tft.println(timeStr);
+
+      tft.setCursor(10, 100);
+      tft.print("Volume: ");
+      tft.print(volume, 1);
+      tft.println(" mL");
+    }
+
+    void showMessage(String msg) {
+      tft.fillScreen(ILI9341_WHITE);
+      tft.setCursor(10, 60);
+      tft.println(msg);
+    }
+};
+
+void countPulse() {
+  pulseCount++;
+}
+
+RealDispenser dispenser;
+
+void setup() {
+  dispenser.begin();
+}
+
+void loop() {
+  dispenser.update();
+}
+</pre>
   
 As shown above, I used <code>millis()</code> to keep track of time and simulate a real-time pouring experience. I avoided using <code>delay()</code> completely. While my original code didn’t use a C++ class, I’m planning to wrap the logic into a class soon so it’s more modular and clean.
 </p>
-
-<h4>4. Oscilloscope Test</h4>
-<p>
-I connected an oscilloscope to the CLK (clock) line of the screen to observe the SPI communication. The waveform looked very clean and had a frequency around 8 MHz. This shows that the TFT screen runs using fast digital signals controlled by hardware SPI. I included a photo of the waveform below.
-</p>
-
-<img src="images/oscilloscope_waveform.jpg" alt="SPI waveform on oscilloscope" style="max-width: 400px; border: 1px solid #ccc;">
 
 <h4>Conclusion</h4>
 <p>

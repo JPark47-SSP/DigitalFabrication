@@ -40,7 +40,101 @@
   <p> For this assignment, I worked with my classmate Fatih. Together, we worked on a feature that controls the servo/dc motor with wifi. </p>
 
   <p> Step 1: Writing a code with Arduino </p>
-  <P> Fatih wrote the code part of our project, using Arduino. Below is the code we used: At first, we have faced serveral problems. We faced multiple exit status 1 issues,  </P>
+  <P> Fatih wrote the code part of our project, using Arduino. Below is the code we used: At first, we have faced serveral problems. We faced multiple exit status 1 issues, no such file or directory, etc. Fortunantely, at the end we managed to figure things out. </P>
+
+#include <ESP32Servo.h>
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <Esp_now.h>
+
+
+const int servoPin = D5;
+const int A1A = D2;
+const int A1B = D3;
+const char* ssid = "MAKERSPACE";
+const char* password = "12345678";
+int xAxis = A0;
+int yAxis = A1;
+char* page = "";
+char* page2 = "";
+
+NetworkServer server(80);
+
+Servo servo;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(xAxis, INPUT);
+  pinMode(yAxis, INPUT);
+  pinMode(servoPin, OUTPUT);
+  pinMode(A1A, OUTPUT);
+  pinMode(A1B, OUTPUT);
+  digitalWrite(A1A ,LOW);
+  digitalWrite(A1B, LOW);
+  servo.attach(servoPin);
+  servo.write(78);
+
+  WiFi.begin(ssid, password);
+
+  Serial.print("Connecting: ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi Connected!");
+  Serial.print("IP Adress: ");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+}            
+
+void loop() {
+  WiFiClient client = server.available();
+  if (client) {
+    String request = client.readStringUntil('\r');
+    Serial.println(request);
+    client.flush();
+
+    if (request.indexOf("/right") != -1) {
+      servo.write(93);
+    } else if (request.indexOf("/left") != -1) {
+      servo.write(63);
+    } else if (request.indexOf("/normal") != -1) {
+      servo.write(78);
+    } else if (request.indexOf("/forward") != -1) {
+      digitalWrite(A1A, HIGH);
+      digitalWrite(A1B, LOW);
+    } else if (request.indexOf("/backward") != -1) {
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, HIGH);
+    } else if (request.indexOf("/stop") != -1) {
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, LOW);
+    }
+
+
+    client.println("HTTP/1.1 200 OK");
+    client.println("Content-Type: text/html");
+    client.println();
+    client.println("<html><body style='text-align:center;'>");
+    client.println("<h1>ESP32 F1 Control</h1>");
+    client.println("<a href='/left'><button>left</button></a>");
+    client.println("<a href='/normal'><button>normal</button></a>");
+    client.println("<a href='/right'><button>right</button></a><br><br>");
+    client.println("<a href='/forward'><button>forward</button></a>");
+    client.println("<a href='/stop'><button>stop</button></a>");
+    client.println("<a href='/backward'><button>backward</button></a>");
+    client.println("</body></html>");
+    
+    delay(1);
+    client.stop();
+  }
+}
+
+
+
 
     <img> 
 

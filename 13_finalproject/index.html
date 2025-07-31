@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jeongwoo's Smart Water Dispenser – PS70 Final Project</title>
+  <title>Development Process – Smart Water Dispenser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -15,26 +15,6 @@
     .section {
       padding: 60px 15px;
     }
-    pre {
-      background: #eee;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-    }
-    .nav-title {
-      font-size: 1.8rem;
-      font-weight: 600;
-    }
-    .dev-btn {
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 30px;
-      transition: all 0.2s ease;
-    }
-    .dev-btn:hover {
-      background-color: #ffffff22;
-      color: #ffffff;
-    }
     .step-card {
       background-color: #ffffff;
       border: 1px solid #dee2e6;
@@ -43,6 +23,14 @@
       margin-bottom: 2rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+    .nav-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    .btn-rounded {
+      border-radius: 30px;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -50,134 +38,20 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm mb-4">
     <div class="container">
-      <a class="navbar-brand nav-title" href="#">PS70 Harvard Secondary School Program 2025</a>
-      <div class="navbar-nav ms-auto align-items-center gap-2">
-        <a class="nav-link" href="../index.html">Home</a>
-        <a class="nav-link" href="../about.html">About</a>
-        <a href="#development" class="btn btn-outline-light btn-sm shadow-sm dev-btn">Development Process</a>
+      <a class="navbar-brand nav-title" href="#">Smart Water Dispenser – Development</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="index.html">Main Project</a>
       </div>
     </div>
   </nav>
 
-  <!-- Main content -->
   <main class="container">
-    <!-- Title -->
     <div class="text-center mb-5">
-      <h1 class="fw-bold">Smart Water Dispenser</h1>
-      <p class="lead">A personalized water dispenser designed for your everyday health. Every component in life starts with water.</p>
+      <h1 class="fw-bold">Development Process</h1>
+      <p class="lead">How I designed, built, and tested the Smart Water Dispenser</p>
     </div>
 
-    <!-- Demo Video -->
-    <div class="section text-center">
-      <h3>Demo Video</h3>
-      <div class="ratio ratio-16x9">
-        <iframe src="https://www.youtube.com/embed/INSERT_VIDEO_ID" title="Demo Video" allowfullscreen></iframe>
-      </div>
-    </div>
-
-    <!-- Motivation -->
     <div class="section">
-      <h3>Motivation - Why did I build this?</h3>
-      <p>As an athlete and student, I often found myself forgetting to hydrate properly. I created this Smart Water Dispenser to promote healthy hydration habits with automation, simplicity, and reliability.</p>
-    </div>
-
-    <!-- Features -->
-    <div class="section">
-      <h3>Features</h3>
-      <ul>
-        <li>Scheduled automatic dispensing</li>
-        <li>Volume control (fixed output)</li>
-        <li>LCD status display</li>
-        <li>Buzzer hydration reminders</li>
-        <li>Manual button mode</li>
-        <li>Sensor-based failsafe cutoff</li>
-      </ul>
-    </div>
-
-    <!-- Images -->
-    <div class="section">
-      <h3>Gallery</h3>
-      <div class="row g-4">
-        <div class="col-md-6"><img src="insert_final_project_image.jpg" class="img-fluid rounded shadow" alt="Final Setup"></div>
-        <div class="col-md-6"><img src="insert_electronics_image.jpg" class="img-fluid rounded shadow" alt="Electronics"></div>
-        <div class="col-md-6"><img src="insert_cad_model_image.jpg" class="img-fluid rounded shadow" alt="CAD Model"></div>
-        <div class="col-md-6"><img src="insert_testing_image.jpg" class="img-fluid rounded shadow" alt="Testing"></div>
-      </div>
-    </div>
-
-    <!-- Downloads -->
-    <div class="section">
-      <h3>Downloadable Files</h3>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col"><div class="card p-3 h-100"><a href="nozzle_mount.stl" download>STL: Nozzle Mount</a></div></div>
-        <div class="col"><div class="card p-3 h-100"><a href="bottle_holder.stl" download>STL: Bottle Holder</a></div></div>
-        <div class="col"><div class="card p-3 h-100"><a href="fusion_project.f3z" download>Fusion 360 Project</a></div></div>
-      </div>
-    </div>
-
-    <!-- Components -->
-    <div class="section">
-      <h3>Components Used</h3>
-      <ul>
-        <li>Seeeduino XIAO ESP32 microcontroller</li>
-        <li>Relay module (for 5V pump)</li>
-        <li>Submersible water pump</li>
-        <li>Ultrasonic sensor (HC-SR04)</li>
-        <li>I2C LCD 16x2</li>
-        <li>Pushbutton and buzzer</li>
-      </ul>
-    </div>
-
-    <!-- Wiring Diagram -->
-    <div class="section">
-      <h3>Wiring Diagram</h3>
-      <img src="insert_wiring_diagram_image.jpg" class="img-fluid rounded shadow" alt="Wiring Diagram">
-    </div>
-
-    <!-- Code -->
-    <div class="section">
-      <h3>Arduino Code</h3>
-      <pre><code>// Partial preview (see full code in GitHub or download)
-#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt;
-#define TRIG 7
-#define ECHO 6
-...
-void dispenseWater() {
-  lcd.print(\"Dispensing...\");
-  digitalWrite(RELAY, HIGH);
-  delay(3000);
-  digitalWrite(RELAY, LOW);
-  tone(BUZZER, 1000, 300);
-}
-      </code></pre>
-    </div>
-
-    <!-- References -->
-    <div class="section">
-      <h3>References</h3>
-      <ul>
-        <li><a href="https://wiki.seeedstudio.com/XIAO_ESP32S3_Getting_Started/" target="_blank">Seeeduino ESP32 Docs</a></li>
-        <li><a href="https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/" target="_blank">HC-SR04 Tutorial</a></li>
-        <li><a href="https://github.com/johnrickman/LiquidCrystal_I2C" target="_blank">LCD I2C Library</a></li>
-        <li><a href="https://circuitdigest.com/tutorial/how-to-control-water-pump-using-arduino-and-relay" target="_blank">Relay Pump Control</a></li>
-      </ul>
-    </div>
-
-    <!-- Future Improvements -->
-    <div class="section">
-      <h3>Future Improvements</h3>
-      <ul>
-        <li>Wi-Fi + app control integration</li>
-        <li>Rotary encoder for dynamic volume</li>
-        <li>Battery backup and water level monitor</li>
-      </ul>
-    </div>
-
-    <!-- Development Process Section -->
-    <div id="development" class="section">
-      <h2 class="text-center mb-5">Development Process</h2>
-
       <div class="step-card">
         <h4>Step 1: Planning & Goal Setting</h4>
         <p>Defined objectives: automate hydration, fixed volume dispensing, and safety via sensors. I sketched goals and required parts before writing a single line of code.</p>
@@ -214,6 +88,10 @@ void dispenseWater() {
           <li>Submersible pump</li>
           <li>3D printed nozzle mount + holder</li>
         </ul>
+      </div>
+
+      <div class="step-card text-center">
+        <a href="index.html" class="btn btn-primary btn-lg btn-rounded shadow">⬅ Back to Main Project Page</a>
       </div>
     </div>
   </main>

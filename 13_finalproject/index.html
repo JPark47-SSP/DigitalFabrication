@@ -1,36 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<title>PS70: Intro to Digital Fabrication </title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../style.css" rel="stylesheet">
-
-
-<nav class="navbar navbar-expand-sm navbar-dark" style=" color: #EEE7E8;">
-  <div style="align-items: center; justify-content: center;" class="container-fluid">
-    <div class="flexrow">
-      <h2 class="nav-title">PS70 Fall 2024</h2>
-    </div>
-    <div class="navbar-nav">
-      <h4><a class="nav-link" href="../index.html">Home</a></h4>
-      <h4><a class="nav-link" href="../about.html">About</a></h4>
-    </div>
-  </div>
-</nav>
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Water Dispenser – PS70 Final Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .section {
+      padding: 60px 15px;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+    .nav-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
 
 <body>
-<xmp style="display:none;">
-<div class="textcontainer">
-<p class="margin"></p>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm mb-4">
+    <div class="container">
+      <a class="navbar-brand nav-title" href="#">PS70 Fall 2024</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="../index.html">Home</a>
+        <a class="nav-link" href="../about.html">About</a>
+      </div>
+    </div>
+  </nav>
 
-<h3>Final Project: [INSERT FINAL PROJECT HERE]</h3>
+  <!-- Main content -->
+  <main class="container">
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h1 class="fw-bold">Smart Water Dispenser</h1>
+      <p class="lead">An automated hydration system for everyday health.</p>
+    </div>
 
+    <!-- Demo Video -->
+    <div class="section text-center">
+      <h3>Demo Video</h3>
+      <div class="ratio ratio-16x9">
+        <iframe src="https://www.youtube.com/embed/INSERT_VIDEO_ID" title="Demo Video" allowfullscreen></iframe>
+      </div>
+    </div>
 
-</div>
-</xmp>
+    <!-- Motivation -->
+    <div class="section">
+      <h3>Motivation</h3>
+      <p>As an athlete and student, I often found myself forgetting to hydrate properly. I created this Smart Water Dispenser to promote healthy hydration habits with automation, simplicity, and reliability.</p>
+    </div>
+
+    <!-- Features -->
+    <div class="section">
+      <h3>Features</h3>
+      <ul>
+        <li>Scheduled automatic dispensing</li>
+        <li>Volume control (fixed output)</li>
+        <li>LCD status display</li>
+        <li>Buzzer hydration reminders</li>
+        <li>Manual button mode</li>
+        <li>Sensor-based failsafe cutoff</li>
+      </ul>
+    </div>
+
+    <!-- Images -->
+    <div class="section">
+      <h3>Gallery</h3>
+      <div class="row g-4">
+        <div class="col-md-6"><img src="insert_final_project_image.jpg" class="img-fluid rounded shadow" alt="Final Setup"></div>
+        <div class="col-md-6"><img src="insert_electronics_image.jpg" class="img-fluid rounded shadow" alt="Electronics"></div>
+        <div class="col-md-6"><img src="insert_cad_model_image.jpg" class="img-fluid rounded shadow" alt="CAD Model"></div>
+        <div class="col-md-6"><img src="insert_testing_image.jpg" class="img-fluid rounded shadow" alt="Testing"></div>
+      </div>
+    </div>
+
+    <!-- Downloads -->
+    <div class="section">
+      <h3>Downloadable Files</h3>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col"><div class="card p-3 h-100"><a href="nozzle_mount.stl" download>STL: Nozzle Mount</a></div></div>
+        <div class="col"><div class="card p-3 h-100"><a href="bottle_holder.stl" download>STL: Bottle Holder</a></div></div>
+        <div class="col"><div class="card p-3 h-100"><a href="fusion_project.f3z" download>Fusion 360 Project</a></div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="section">
+      <h3>Components Used</h3>
+      <ul>
+        <li>Seeeduino XIAO ESP32 microcontroller</li>
+        <li>Relay module (for 5V pump)</li>
+        <li>Submersible water pump</li>
+        <li>Ultrasonic sensor (HC-SR04)</li>
+        <li>I2C LCD 16x2</li>
+        <li>Pushbutton and buzzer</li>
+      </ul>
+    </div>
+
+    <!-- Wiring Diagram -->
+    <div class="section">
+      <h3>Wiring Diagram</h3>
+      <img src="insert_wiring_diagram_image.jpg" class="img-fluid rounded shadow" alt="Wiring Diagram">
+    </div>
+
+    <!-- Code -->
+    <div class="section">
+      <h3>Arduino Code</h3>
+      <pre><code>// Partial preview (see full code in GitHub or download)
+#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+#define TRIG 7
+#define ECHO 6
+...
+void dispenseWater() {
+  lcd.print(\"Dispensing...\");
+  digitalWrite(RELAY, HIGH);
+  delay(3000);
+  digitalWrite(RELAY, LOW);
+  tone(BUZZER, 1000, 300);
+}
+      </code></pre>
+    </div>
+
+    <!-- References -->
+    <div class="section">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://wiki.seeedstudio.com/XIAO_ESP32S3_Getting_Started/" target="_blank">Seeeduino ESP32 Docs</a></li>
+        <li><a href="https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/" target="_blank">HC-SR04 Tutorial</a></li>
+        <li><a href="https://github.com/johnrickman/LiquidCrystal_I2C" target="_blank">LCD I2C Library</a></li>
+        <li><a href="https://circuitdigest.com/tutorial/how-to-control-water-pump-using-arduino-and-relay" target="_blank">Relay Pump Control</a></li>
+      </ul>
+    </div>
+
+    <!-- Future -->
+    <div class="section">
+      <h3>Future Improvements</h3>
+      <ul>
+        <li>Wi-Fi + app control integration</li>
+        <li>Rotary encoder for dynamic volume</li>
+        <li>Battery backup and water level monitor</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Footer Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-<script src="../strapdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
-
 </html>

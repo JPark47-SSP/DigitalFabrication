@@ -153,18 +153,51 @@
     <!-- Code -->
     <div class="section">
       <h3>Arduino Code</h3>
-      <pre><code>// Partial preview (see full code in GitHub or download)
-#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt;
-#define TRIG 7
-#define ECHO 6
-...
-void dispenseWater() {
-  lcd.print("Dispensing...");
-  digitalWrite(RELAY, HIGH);
-  delay(3000);
-  digitalWrite(RELAY, LOW);
-  tone(BUZZER, 1000, 300);
+const int A1A = D6;         // Motor speed control
+const int A1B = D7;         // Motor direction control
+const int buttonPin = D2;   // Button input
+
+bool isDispensing = false;
+unsigned long dispenseStartTime = 0;
+
+void setup() {
+  pinMode(A1A, OUTPUT);
+  pinMode(A1B, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP); // Button between D2 and GND
+
+  digitalWrite(A1A, LOW);  // Ensure motor starts OFF
+  digitalWrite(A1B, LOW);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Check if motor is currently dispensing
+  if (isDispensing) {
+    // Check if 25 seconds have passed
+    if (millis() - dispenseStartTime >= 80000) {
+      // Turn motor OFF
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, LOW);
+      isDispensing = false;
+      Serial.println("done dispensing");
+    }
+  } else {
+    // Wait for button press
+    Serial.println("waiting for button press");
+    if (digitalRead(buttonPin) == LOW) {
+        Serial.println("button pressed");
+        digitalWrite(A1A, LOW);
+        digitalWrite(A1B, HIGH);
+        dispenseStartTime = millis();
+        isDispensing = true;
+
+        // Wait for button release to avoid retriggering
+        while (digitalRead(buttonPin) == LOW) {
+          Serial.println("button is still being pressed");
+          delay(10);
+        }
+    }
+  }
 }
       </code></pre>
     </div>

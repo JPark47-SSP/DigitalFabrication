@@ -153,6 +153,11 @@
     <!-- Code -->
     <div class="section">
       <h3>Arduino Code</h3>
+<!-- Code -->
+<div class="section">
+  <h3>Arduino Code</h3>
+  <pre><code class="language-cpp">
+// Pin assignments
 const int A1A = D6;         // Motor speed control
 const int A1B = D7;         // Motor direction control
 const int buttonPin = D2;   // Button input
@@ -171,36 +176,34 @@ void setup() {
 }
 
 void loop() {
-  // Check if motor is currently dispensing
   if (isDispensing) {
-    // Check if 25 seconds have passed
+    // Check if 80 seconds have passed
     if (millis() - dispenseStartTime >= 80000) {
-      // Turn motor OFF
       digitalWrite(A1A, LOW);
       digitalWrite(A1B, LOW);
       isDispensing = false;
       Serial.println("done dispensing");
     }
   } else {
-    // Wait for button press
     Serial.println("waiting for button press");
     if (digitalRead(buttonPin) == LOW) {
-        Serial.println("button pressed");
-        digitalWrite(A1A, LOW);
-        digitalWrite(A1B, HIGH);
-        dispenseStartTime = millis();
-        isDispensing = true;
+      Serial.println("button pressed");
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, HIGH);
+      dispenseStartTime = millis();
+      isDispensing = true;
 
-        // Wait for button release to avoid retriggering
-        while (digitalRead(buttonPin) == LOW) {
-          Serial.println("button is still being pressed");
-          delay(10);
-        }
+      // Wait for button release
+      while (digitalRead(buttonPin) == LOW) {
+        Serial.println("button is still being pressed");
+        delay(10);
+      }
     }
   }
 }
-      </code></pre>
-    </div>
+  </code></pre>
+</div>
+
 
     <!-- References -->
     <div class="section">

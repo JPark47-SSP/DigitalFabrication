@@ -23,38 +23,42 @@
 <div class="textcontainer">
 <p class="margin">   </p>
 
+  
 <h3>Week 4: Microcontroller Programming</h3>
+
+<div style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px;">
+  
+<p> Continuing from the previous slide, here is the code I used for my motor to spin: </p>
 
 <!-- Code -->
 <div class="section">
   <h3>Arduino Code</h3>
   <pre><code class="language-cpp">
 // Pin assignments
-const int A1A = D6;         // Motor speed control
-const int A1B = D7;         // Motor direction control
-const int buttonPin = D2;   // Button input
+const int A1A = D6;         
+const int A1B = D7;         
+const int buttonPin = D2;  
 
-bool isDispensing = false;
+bool isPressed = false;
 unsigned long dispenseStartTime = 0;
 
 void setup() {
   pinMode(A1A, OUTPUT);
   pinMode(A1B, OUTPUT);
-  pinMode(buttonPin, INPUT_PULLUP); // Button between D2 and GND
+  pinMode(buttonPin, INPUT_PULLUP); 
 
-  digitalWrite(A1A, LOW);  // Ensure motor starts OFF
+  digitalWrite(A1A, LOW);  
   digitalWrite(A1B, LOW);
   Serial.begin(9600);
 }
 
 void loop() {
-  if (isDispensing) {
-    // Check if 80 seconds have passed
-    if (millis() - dispenseStartTime >= 80000) {
+  if (isRunning) {
+    if (millis() - RunTime = 30000) {
       digitalWrite(A1A, LOW);
       digitalWrite(A1B, LOW);
       isDispensing = false;
-      Serial.println("done dispensing");
+      Serial.println("done rotating");
     }
   } else {
     Serial.println("waiting for button press");
@@ -62,7 +66,7 @@ void loop() {
       Serial.println("button pressed");
       digitalWrite(A1A, LOW);
       digitalWrite(A1B, HIGH);
-      dispenseStartTime = millis();
+      RunTime = millis();
       isDispensing = true;
 
       // Wait for button release

@@ -25,7 +25,56 @@
 
 <h3>Week 4: Microcontroller Programming</h3>
 
-<h4>[Do Something with an arduino]</h4>
+<!-- Code -->
+<div class="section">
+  <h3>Arduino Code</h3>
+  <pre><code class="language-cpp">
+// Pin assignments
+const int A1A = D6;         // Motor speed control
+const int A1B = D7;         // Motor direction control
+const int buttonPin = D2;   // Button input
+
+bool isDispensing = false;
+unsigned long dispenseStartTime = 0;
+
+void setup() {
+  pinMode(A1A, OUTPUT);
+  pinMode(A1B, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP); // Button between D2 and GND
+
+  digitalWrite(A1A, LOW);  // Ensure motor starts OFF
+  digitalWrite(A1B, LOW);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (isDispensing) {
+    // Check if 80 seconds have passed
+    if (millis() - dispenseStartTime >= 80000) {
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, LOW);
+      isDispensing = false;
+      Serial.println("done dispensing");
+    }
+  } else {
+    Serial.println("waiting for button press");
+    if (digitalRead(buttonPin) == LOW) {
+      Serial.println("button pressed");
+      digitalWrite(A1A, LOW);
+      digitalWrite(A1B, HIGH);
+      dispenseStartTime = millis();
+      isDispensing = true;
+
+      // Wait for button release
+      while (digitalRead(buttonPin) == LOW) {
+        Serial.println("button is still being pressed");
+        delay(10);
+      }
+    }
+  }
+}
+  </code></pre>
+</div>
 
 
 

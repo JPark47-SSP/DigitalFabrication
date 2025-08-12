@@ -52,10 +52,9 @@ For this week, I designed and printed a **bottom ventilation plate** for my Smar
   </div>
 </div>
 
-### Why it’s additive-only (or hard to make subtractively)
-- 2 mm ribs + < 3 mm slot spacing produce thin walls that would be fragile with drilling/milling.
-- Underside fillets and integrated snap tabs complicate tool access.
-- Parametric lattice makes it efficient to print flat with minimal supports.
+### Notes
+- The print was overall successful 
+- Printed for total 7 hours
 
 ---
 
@@ -64,47 +63,6 @@ Use the links below to download my source model, STL, and sliced G-code.
 - <a download href="./files/JP-SODADRAINAGE.f3z">Download Fusion 360 Archive (.f3z)</a>  
 - <a download href="/files/JP-SODADRAINAGE.stl">Download STL (.stl)</a>  
 - <a download href="/files/JP-SODADRAINAGE.gcode">Download G-code (.gcode)</a>
-
----
-
-### Print settings (snapshot)
-<table class="table table-sm table-striped align-middle">
-  <thead><tr><th>Setting</th><th>Value</th></tr></thead>
-  <tbody>
-    <tr><td>Material</td><td>PLA</td></tr>
-    <tr><td>Nozzle</td><td>0.4 mm</td></tr>
-    <tr><td>Layer height</td><td>0.20 mm</td></tr>
-    <tr><td>Walls / Top / Bottom</td><td>3 / 4 / 4</td></tr>
-    <tr><td>Infill</td><td>20% Grid</td></tr>
-    <tr><td>Supports</td><td>None</td></tr>
-    <tr><td>Build Plate Adhesion</td><td>Skirt</td></tr>
-    <tr><td>Print Temp / Bed</td><td>205 °C / 60 °C</td></tr>
-  </tbody>
-</table>
-
----
-
-## 3D Scan (RevoPoint / Photogrammetry)
-
-I captured a quick scan of the dispenser base to verify clearances.
-
-<div class="row g-3 my-2">
-  <div class="col-md-6">
-    <figure>
-      <img class="img-fluid rounded shadow-sm" src="./scan_turntable.jpg" alt="Scan setup on turntable">
-      <figcaption class="small text-muted mt-1">Turntable scan setup with marker mat.</figcaption>
-    </figure>
-  </div>
-  <div class="col-md-6">
-    <figure>
-      <img class="img-fluid rounded shadow-sm" src="./scan_mesh_preview.png" alt="Watertight mesh preview">
-      <figcaption class="small text-muted mt-1">Watertight mesh preview after alignment & cleanup.</figcaption>
-    </figure>
-  </div>
-</div>
-
-- Workflow: **Capture → Align → Merge → Mesh → Decimate → Export (.obj/.stl)**
-- Result file: <a download href="./files/base_scan_clean.stl">Download the cleaned scan (.stl)</a>
 
 ---
 
